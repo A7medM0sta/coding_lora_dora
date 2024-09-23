@@ -72,6 +72,8 @@ if __name__ == "__main__":
 
     if not torch.cuda.is_available():
         print("Please switch to a GPU machine before running this code.")
+    else:
+        device = "mps"
         quit()
 
     df_train, df_val, df_test = get_dataset()
@@ -117,7 +119,7 @@ if __name__ == "__main__":
     trainer = L.Trainer(
         max_epochs=3,
         callbacks=callbacks,
-        accelerator="gpu",
+        accelerator="cpu",
         precision="16-mixed",
         devices=[int(args.device)],
         logger=logger,
