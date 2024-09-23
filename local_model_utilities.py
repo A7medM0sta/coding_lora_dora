@@ -7,6 +7,17 @@ import torch.nn.functional as F
 
 
 def compute_accuracy(model, data_loader, device):
+    """
+    This function computes the accuracy of the model on the given data loader.
+
+    Args:
+        model (torch.nn.Module): The model to evaluate.
+        data_loader (torch.utils.data.DataLoader): The data loader to use for evaluation.
+        device (torch.device): The device to use for evaluation.
+
+    Returns:
+        float: The accuracy of the model on the given data loader.
+    """
     model.eval()
     correct_pred, num_examples = 0, 0
     with torch.no_grad():
@@ -18,7 +29,6 @@ def compute_accuracy(model, data_loader, device):
             num_examples += targets.size(0)
             correct_pred += (predicted_labels == targets).sum()
         return correct_pred.float()/num_examples * 100
-
 
 def train(num_epochs, model, optimizer, train_loader, device):
 
